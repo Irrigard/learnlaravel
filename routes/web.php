@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +12,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+/*Route::get('/', function () {
+    return '!!!';
+});*/
+
+//Route::get('/user/{id}/{name}', function ($id, $name) {
+//    return $id . $name;
+//})->where(['id' => '[0-9]+', 'name' => '[a-z]{3,}']);
+//
+//Route::get('/users/{order}', function ($order) {
+//    return $order;
+//})->where(['order' => 'name|surname|age']);
+//
+//Route::get('/{year}/{month}/{day}/', function ($year, $month, $day) {
+//    $week = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+//    return $week[date('w', mktime(0, 0, 0, $month, $day, $year))];
+//})->where(['year' => '\d{4}', 'month' => '\d{2}', 'day' => '\d{2}']);
+
+Route::get('test/show/{param1}/{param2}/', 'TestController@show')->where(['param1' => '\d+', 'param2' => '\d+']);
+Route::get('user/{id}/{field}', 'EmployeeController@showField')->where(['id' => '[1-5]', 'field' => 'name|surname|salary']);
+Route::get('user/{id}', 'EmployeeController@showOne')->where(['id' => '[1-5]']);
