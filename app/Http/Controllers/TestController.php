@@ -3,8 +3,8 @@ namespace App\Http\Controllers;
 
 class TestController extends Controller
 {
-    public function show($id1, $id2)
+    public function show()
     {
-        return $id1 + $id2;
+        return view('test.show', ['var1' => '1', 'var2' => '2']);
     }
 }
