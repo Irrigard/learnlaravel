@@ -34,5 +34,6 @@ use Illuminate\Support\Facades\Route;
 //})->where(['year' => '\d{4}', 'month' => '\d{2}', 'day' => '\d{2}']);
 
 Route::get('test/show/', 'TestController@show');
+Route::get('test/lout/', 'TestController@getContent');
 Route::get('user/{id}/{field}', 'EmployeeController@showField')->where(['id' => '[1-5]', 'field' => 'name|surname|salary']);
 Route::get('user/{id}', 'EmployeeController@showOne')->where(['id' => '[1-5]']);
