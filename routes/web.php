@@ -39,6 +39,8 @@ Route::get('product/{catId}/', 'ProductController@showCategory');
 Route::get('product/{catId}/{prodId}/', 'ProductController@showProduct');
 Route::get('categories/', 'ProductController@showCategoryList');
 Route::get('test/show/', 'TestController@show');
+Route::get('test/form/', 'TestController@form');
+Route::get('test/result/', 'TestController@result');
 Route::get('test/lout/', 'TestController@getContent');
 Route::get('user/{id}/{field}', 'EmployeeController@showField')->where(['id' => '[1-5]', 'field' => 'name|surname|salary']);
 Route::get('user/{id}', 'EmployeeController@showOne')->where(['id' => '[1-5]']);

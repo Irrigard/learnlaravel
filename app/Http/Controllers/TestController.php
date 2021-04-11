@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
@@ -82,5 +83,19 @@ class TestController extends Controller
     {
         return view('test.inh', ['content'=>'content', 'title'=>'Page Title', 'links'=>$this->links, 'employees'=>$this->employees, 'users'=>$this->users, 'strArr'=>['String 1', 'String 2', 'String 3'],
             'daysArr'=>range(1, date('t', time())), 'today'=>date('j', time())]);
+    }
+
+    public function form()
+    {
+        return view('test.form');
+    }
+
+    public function result(Request $request)
+    {
+        if($request->has('text1') && $request->has('text2') && $request->has('text3'))
+        {
+            return view('test.result', ['input1'=>$request->input('text1'), 'input2'=>$request->input('text2'), 'input3'=>$request->input('text3')]);
+        }
+        return view('test.form');
     }
 }
