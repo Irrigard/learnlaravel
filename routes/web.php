@@ -33,6 +33,11 @@ use Illuminate\Support\Facades\Route;
 //    return $week[date('w', mktime(0, 0, 0, $month, $day, $year))];
 //})->where(['year' => '\d{4}', 'month' => '\d{2}', 'day' => '\d{2}']);
 
+Route::get('post/{id}/', 'PostController@showOne');
+Route::get('posts/', 'PostController@showAll');
+Route::get('product/{catId}/', 'ProductController@showCategory');
+Route::get('product/{catId}/{prodId}/', 'ProductController@showProduct');
+Route::get('categories/', 'ProductController@showCategoryList');
 Route::get('test/show/', 'TestController@show');
 Route::get('test/lout/', 'TestController@getContent');
 Route::get('user/{id}/{field}', 'EmployeeController@showField')->where(['id' => '[1-5]', 'field' => 'name|surname|salary']);
