@@ -1,7 +1,8 @@
 @extends('test.master')
 
 @section('content')
-    <form action="/test/result/">
+    <form action="{{route('form.result')}}" method="post">
+        @csrf
         <input type="text" name="text1">
         <input type="text" name="text2">
         <input type="text" name="text3">

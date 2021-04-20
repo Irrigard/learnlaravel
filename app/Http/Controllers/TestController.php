@@ -92,10 +92,13 @@ class TestController extends Controller
 
     public function result(Request $request)
     {
-        if($request->has('text1') && $request->has('text2') && $request->has('text3'))
+        if ($request->isMethod('get'))
+        {
+            return view('test.form');
+        }
+        if ($request->isMethod('post') && $request->has('text1') && $request->has('text2') && $request->has('text3'))
         {
             return view('test.result', ['input1'=>$request->input('text1'), 'input2'=>$request->input('text2'), 'input3'=>$request->input('text3')]);
         }
-        return view('test.form');
     }
 }
