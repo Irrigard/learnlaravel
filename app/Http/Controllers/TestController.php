@@ -90,15 +90,21 @@ class TestController extends Controller
         return view('test.form');
     }
 
-    public function result(Request $request)
+    public function result(Request $request, $id1, $id2)
     {
         if ($request->isMethod('get'))
         {
             return view('test.form');
         }
-        if ($request->isMethod('post') && $request->has('text1') && $request->has('text2') && $request->has('text3'))
+        if ($request->isMethod('post'))
         {
-            return view('test.result', ['input1'=>$request->input('text1'), 'input2'=>$request->input('text2'), 'input3'=>$request->input('text3')]);
+            return view('test.result', ['input'=>$request->only('name', 'surname', 'login'), 'id1'=>$id1, 'id2'=>$id2]);
         }
+    }
+
+    public function method(Request $request)
+    {
+        $isFlag = $request->is('test/*') ? 'true' : 'false';
+        return view('test.method', ['methods'=>['path'=>$request->path(), 'url'=>$request->url(), 'FullUrl'=>$request->fullUrl(), 'FullUrlWithQuery'=>$request->fullUrlWithQuery(['param2' => '2']), 'is' => $isFlag]]);
     }
 }
