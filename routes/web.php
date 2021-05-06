@@ -40,6 +40,7 @@ Route::get('product/{catId}/{prodId}/', 'ProductController@showProduct');
 Route::get('categories/', 'ProductController@showCategoryList');
 Route::get('test/show/', 'TestController@show');
 Route::get('test/method/', 'TestController@method');
+Route::get('test/sessions/', 'TestController@sessions');
 Route::get( 'test/form/', 'TestController@form');
 Route::match(['get', 'post'],'test/result/{id1?}/{id2?}', 'TestController@result')->name('form.result');
 Route::get('test/lout/', 'TestController@getContent');

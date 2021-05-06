@@ -107,4 +107,31 @@ class TestController extends Controller
         $isFlag = $request->is('test/*') ? 'true' : 'false';
         return view('test.method', ['methods'=>['path'=>$request->path(), 'url'=>$request->url(), 'FullUrl'=>$request->fullUrl(), 'FullUrlWithQuery'=>$request->fullUrlWithQuery(['param2' => '2']), 'is' => $isFlag]]);
     }
+
+    public function sessions(Request $request)
+    {
+        $value = $request->session()->get('time1');
+        if ($value === null)
+        {
+            $value = date('H.i.s', time());
+            $request->session()->put('time1', $value);
+        }
+        $request->session()->put('arr', ['a', 'b', 'c']);
+        $arr = $request->session()->get('arr');
+        $request->session()->push('arr', 'd');
+        $arr2 = $request->session()->get('arr');
+        $request->session()->forget('time1');
+        $pullArr = $request->session()->pull('arr');
+        $all = $request->session()->all();
+        $request->session()->flush();
+        if ($request->session()->has('test'))
+        {
+            $request->session()->put('test', 'test');
+        } else {
+            echo $request->session()->get('test');
+        }
+        session(['key'=>'value']);
+        $var = session('key');
+        return view('test.sessions', ['value'=>$value, 'arr'=>implode('', $arr), 'arr2'=>implode('', $arr2), 'pullArr'=>implode('', $pullArr), 'all'=>$all, 'var'=>$var]);
+    }
 }
