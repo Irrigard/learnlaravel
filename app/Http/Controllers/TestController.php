@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller
 {
@@ -133,5 +134,37 @@ class TestController extends Controller
         session(['key'=>'value']);
         $var = session('key');
         return view('test.sessions', ['value'=>$value, 'arr'=>implode('', $arr), 'arr2'=>implode('', $arr2), 'pullArr'=>implode('', $pullArr), 'all'=>$all, 'var'=>$var]);
+    }
+
+    public function redirect(Request $request)
+    {
+        if ($request->has('num'))
+        {
+            if (($request->get('num') >= 1 && $request->get('num') <= 10)){
+                return redirect('test/inRange', ['num'=>true]);
+            }
+            return view('test.redirect', ['errorNum' => true]);
+        }
+        if ($request->has('email'))
+        {
+            if (filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)) {
+                return redirect()->route('inRange', [1, 2])->withInput();
+            //    return redirect('test/inRange')->withInput();
+            }
+
+            return view('test.redirect', ['errorMail' => true]);
+        }
+        return view('test.redirect');
+    }
+
+    public function inRange(Request $request, $par1 = null, $par2 = null)
+    {
+        if (!$request->old('email'))
+        {
+            $email = null;
+        } else {
+            $email = $request->old('email');
+        }
+        return view('test.inRange', ['email'=>$email]);
     }
 }
