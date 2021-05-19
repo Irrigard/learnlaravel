@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller
@@ -166,5 +167,34 @@ class TestController extends Controller
             $email = $request->old('email');
         }
         return view('test.inRange', ['email'=>$email]);
+    }
+
+    public function flashSet(Request $request)
+    {
+        if ($request->has('1') && $request->has('2') && $request->has('3') && $request->has('4') && $request->has('5'))
+        {
+            $request->flash();
+            return redirect('test/flashGet');
+        }
+        if ($request->has('name') && $request->has('surname'));
+        {
+            $request->flash();
+        }
+        return view('test.flashSet');
+    }
+
+    public function flashGet(Request $request)
+    {
+        if ($request->old('1'))
+        {
+            $sum = 0;
+            for ($i=1; $i<=5; $i++)
+            {
+                $sum += $request->old($i);
+            }
+        } else {
+            $sum = null;
+        }
+        return view('test.flashGet', ['flash'=>$sum]);
     }
 }
