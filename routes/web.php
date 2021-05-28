@@ -43,6 +43,7 @@ Route::get('test/method/', 'TestController@method');
 Route::get('test/sessions/', 'TestController@sessions');
 Route::get('test/flashSet/', 'TestController@flashSet');
 Route::get('test/flashGet/', 'TestController@flashGet');
+Route::get('test/response/', 'TestController@response');
 Route::match(['get', 'post'],'test/redirect/', 'TestController@redirect');
 Route::match(['get', 'post'],'test/inRange/{par1?}/{par2?}/', 'TestController@inRange')->name('inRange');
 Route::match(['get', 'post'],'test/inRange/', 'TestController@inRange');

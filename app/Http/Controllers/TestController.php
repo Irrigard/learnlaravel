@@ -197,4 +197,9 @@ class TestController extends Controller
         }
         return view('test.flashGet', ['flash'=>$sum]);
     }
+
+    public function response()
+    {
+        return response('Hello world', 200)->withHeaders(['Content-Type'=>'text/plain', 'X-Header-One'=>'Header Value']);
+    }
 }
